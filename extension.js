@@ -26,8 +26,15 @@ vscode.commands.registerCommand('my-extension.analyzeCode', async () => {
 
   try {
     const analysis = await analyzeCode(code);
-    // Display the analysis in the editor (replace with your logic)
-    vscode.window.showInformationMessage(`Analysis: ${analysis.analysis}`);
+  
+    // Improved logic for displaying analysis (replace placeholders with your logic)
+    if (analysis.analysis) {
+      vscode.window.showInformationMessage(`Analysis: ${analysis.analysis}`);
+    } else if (analysis.error) {
+      vscode.window.showErrorMessage(`Analysis Error: ${analysis.error}`);
+    } else {
+      vscode.window.showWarningMessage('Unexpected response from analysis server');
+    }
   } catch (error) {
     vscode.window.showErrorMessage('Failed to analyze code');
   }
